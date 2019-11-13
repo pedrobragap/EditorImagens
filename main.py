@@ -89,7 +89,7 @@ class TelaEdicao(Screen, Geral):
 		self.exibir_imagem()
 
 	def bt_brilho(self,*args):
-		b = float(args[1])
+		b = float(arg)
 		ed.brilho_imagem(b)
 		self.exibir_imagem()
 	

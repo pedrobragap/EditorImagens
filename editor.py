@@ -1,5 +1,5 @@
 from os import path
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageOps
 
 
 class Editor():
@@ -19,6 +19,7 @@ class Editor():
 	def carregar_imagem(self, imagem):
 		try:
 			self.img = Image.open(imagem)
+			self.img_temp = self.img
 			self.img_formato = self.img.format
 			self.img_local = path.dirname(path.realpath(imagem))
 			self.img_nome, self.img_ext = path.splitext(path.basename(imagem))
@@ -36,11 +37,14 @@ class Editor():
 
 	def remover_cor_imagem(self):
 		conversor = ImageEnhance.Color(self.img)
-		self.img = conversor.enhance(0)
+		#self.img = conversor.enhance(0)
+		self.img = ImageOps.equalize(self.img)
+
+		
 	
 	def cor_imagem(self,a):
 		conversor = ImageEnhance.Color(self.img)
-		self.img = conversor.enhance(a)
+		self.img_temp = conversor.enhance(a)
 
 	def brilho_imagem(self,b):
 		conversorb = ImageEnhance.Brightness(self.img)
