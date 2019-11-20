@@ -4,6 +4,7 @@ from PIL import Image, ImageEnhance, ImageOps
 
 class Editor():
 	img = None
+	img_temp = None
 	img_formato = None
 	img_local = None
 	img_nome = None
@@ -37,20 +38,25 @@ class Editor():
 
 	def remover_cor_imagem(self):
 		conversor = ImageEnhance.Color(self.img)
-		#self.img = conversor.enhance(0)
+		self.img = conversor.enhance(0)
 		self.img = ImageOps.equalize(self.img)
 
 		
 	
 	def cor_imagem(self,a):
+		self.img = self.img_temp
 		conversor = ImageEnhance.Color(self.img)
-		self.img_temp = conversor.enhance(a)
+		self.img = conversor.enhance(a)
+
+
 
 	def brilho_imagem(self,b):
+		self.img = self.img_temp
 		conversorb = ImageEnhance.Brightness(self.img)
 		self.img = conversorb.enhance(b)
 
 	def contraste_imagem(self,c):
+		self.img = self.img_temp
 		conversorc = ImageEnhance.Contrast(self.img)
 		self.img = conversorc.enhance(c)
 

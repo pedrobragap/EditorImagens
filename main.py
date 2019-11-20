@@ -1,3 +1,5 @@
+import kivy
+kivy.require('1.9.1')
 from io import BytesIO
 from editor import ed
 from kivy.app import App
@@ -89,7 +91,7 @@ class TelaEdicao(Screen, Geral):
 		self.exibir_imagem()
 
 	def bt_brilho(self,*args):
-		b = float(arg)
+		b = float(args[1])
 		ed.brilho_imagem(b)
 		self.exibir_imagem()
 	
