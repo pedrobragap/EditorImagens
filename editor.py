@@ -1,5 +1,9 @@
 from os import path
 from PIL import Image, ImageEnhance, ImageOps
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+
 
 
 class Editor():
@@ -9,6 +13,7 @@ class Editor():
 	img_local = None
 	img_nome = None
 	img_ext = None
+	
 
 	def resetar(self):
 		self.img = None
@@ -19,8 +24,13 @@ class Editor():
 
 	def carregar_imagem(self, imagem):
 		try:
+			
 			self.img = Image.open(imagem)
+			self.imgcv = cv2.imread(imagem,0)
 			self.img_temp = self.img
+			self.img_temp1 = self.img_temp
+			self.img_temp2 = self.img_temp1
+			self.img_temp3 = self.img_temp2
 			self.img_formato = self.img.format
 			self.img_local = path.dirname(path.realpath(imagem))
 			self.img_nome, self.img_ext = path.splitext(path.basename(imagem))
@@ -41,26 +51,37 @@ class Editor():
 		self.img = conversor.enhance(0)
 		self.img = ImageOps.equalize(self.img)
 
+	def fourier(self):
+		f = np.fft.fft2(self.imgcv)
+		fshift = np.fft.fftshift(f)
+		magnitude_spectrum = 20*np.log(np.abs(fshift))
+		image = Image.fromarray(magnitude_spectrum)
+		image.show()
+
 		
 	
 	def cor_imagem(self,a):
-		self.img = self.img_temp
-		conversor = ImageEnhance.Color(self.img)
-		self.img = conversor.enhance(a)
-
-
+			self.img = self.img_temp
+			conversor = ImageEnhance.Color(self.img)
+			self.img = conversor.enhance(a)
+			self.img_temp1 = self.img
+			self.img_temp2 = self.img
 
 	def brilho_imagem(self,b):
-		self.img = self.img_temp
-		conversorb = ImageEnhance.Brightness(self.img)
-		self.img = conversorb.enhance(b)
+			self.img = self.img_temp1
+			conversorb = ImageEnhance.Brightness(self.img)
+			self.img = conversorb.enhance(b)
+			self.img_temp = self.img
+			self.img_temp2 = self.img
+
+		
 
 	def contraste_imagem(self,c):
-		self.img = self.img_temp
-		conversorc = ImageEnhance.Contrast(self.img)
-		self.img = conversorc.enhance(c)
-
-
+			self.img = self.img_temp2
+			conversorc = ImageEnhance.Contrast(self.img)
+			self.img = conversorc.enhance(c)
+			self.img_temp = self.img
+			self.img_temp1 = self.img
 
 	def salvar(self):
 		ln = self.img_local + '/' + self.img_nome + 'edit'+ self.img_ext

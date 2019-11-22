@@ -87,7 +87,8 @@ class TelaEdicao(Screen, Geral):
 		self.exibir_imagem()
 
 	def bt_preto_e_branco(self):
-		ed.remover_cor_imagem()
+		ed.fourier()
+		#ed.remover_cor_imagem()
 		self.exibir_imagem()
 
 	def bt_brilho(self,*args):
