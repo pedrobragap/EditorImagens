@@ -57,6 +57,7 @@ class Editor():
 		magnitude_spectrum = 20*np.log(np.abs(fshift))
 		image = Image.fromarray(magnitude_spectrum)
 		image.show()
+		image.convert("L").save("imgfreq.bmp")
 
 		
 	
