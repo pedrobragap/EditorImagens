@@ -5,6 +5,7 @@
 #:set cor_botao_azul .23, .41, .78, 1
 #:set cor_botao_laranja .93, .52, .31, 1
 
+#:set cor_texto1 .10, .10, .10, 1
 <BotaoEdicao@Button>:
 	nome_imagem: ''
 	background_down: ''
@@ -46,6 +47,7 @@
 					size: self.size[0] - 12, self.size[1] - 12
 					pos: self.pos[0] + 6, self.pos[1] + 6
 					radius: 5, 5, 5, 5
+
 			BoxLayout:
 				Image:
 					source: 'icones/arquivo_de_imagem.png'
@@ -62,43 +64,60 @@
 
 <TelaEdicao>:
 	BoxLayout:
-		padding: 15
+        padding: 15
 		BoxLayout:
 			orientation: 'vertical'
 			BoxLayout:
 				size_hint: 1, None
-				height: 100
+				height: 80
+				width: 30
 				spacing: 5
+                BotaoEdicao:
+                    nome_imagem: 'bt1.png'
+                    on_release: root.bt_girar_anti_horario()
 				BotaoEdicao:
-					nome_imagem: 'bt1.png'
-					on_release: root.bt_girar_anti_horario()
-				BotaoEdicao:
-					nome_imagem: 'bt2.png'
+					nome_imagem: 'bt2aa.png'
 					on_release: root.bt_girar_horario()
 				BotaoEdicao:
 					nome_imagem: 'bt3.png'
 					on_release: root.bt_preto_e_branco()
-				Slider:
-					text: "Cor"
-				    id: slidera_id
-			        min: 1
-			        max: 5
-			        step: 0.5
-					on_value: root.bt_cor(*args)
-				Slider:
-					text: "Brilho"
-				    id: sliderb_id
-			        min: 1
-			        max: 5
-			        step: 0.5
-					on_value: root.bt_brilho(*args)
-				Slider:
-					text: "Contraste"
-				    id: sliderc_id
-			        min: 1
-			        max: 5
-			        step: 0.5
-					on_value: root.bt_contraste(*args)
+
+                BoxLayout :
+                    orientation:'vertical'
+                    Label :
+                        text : 'Cor'
+                        color: cor_texto1
+                    Slider :
+                        id : slidera_id
+                        min : 1
+                        max : 5
+                        step : 0.5
+                        on_value: root.bt_cor(*args)
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Brilho'
+                        color: cor_texto1
+                    Slider:
+                        id: sliderb_id
+                        min: 1
+                        max: 5
+                        step: 0.5
+                        on_value: root.bt_brilho(*args)
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        text: 'Contraste'
+                        color: cor_texto1
+                    Slider:
+                        id: sliderc_id
+                        min: 1
+                        max: 5
+                        step: 0.5
+                        on_value: root.bt_contraste(*args)
+
 			Widget:
 				size_hint: 1, None
 				height: 10
@@ -109,7 +128,7 @@
 				height: 10
 			BoxLayout:
 				size_hint: 1, None
-				height: 100
+				height: 50
 				spacing: 5
 				BotaoCancelarSalvar:
 					text: 'Cancelar'

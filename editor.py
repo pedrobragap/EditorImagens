@@ -27,6 +27,7 @@ class Editor():
 			
 			self.img = Image.open(imagem)
 			self.imgcv = cv2.imread(imagem,0)
+			self.imgInicial = Image.open(imagem)
 			self.img_temp = self.img
 			self.img_temp1 = self.img_temp
 			self.img_temp2 = self.img_temp1
@@ -75,7 +76,8 @@ class Editor():
 			self.img_temp = self.img
 			self.img_temp2 = self.img
 
-		
+	def imagem_inicial(self):
+		self.img = self.imgInicial
 
 	def contraste_imagem(self,c):
 			self.img = self.img_temp2

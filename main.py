@@ -77,7 +77,7 @@ class TelaEdicao(Screen, Geral):
 		self.exibir_imagem()
 
 	def bt_girar_horario(self):
-		ed.girar_imagem('horario')
+		ed.imagem_inicial()
 		self.exibir_imagem()
 
 	def bt_cor(self,*args):
