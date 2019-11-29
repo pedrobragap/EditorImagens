@@ -78,6 +78,11 @@ class Editor():
 
 	def imagem_inicial(self):
 		self.img = self.imgInicial
+		self.img_temp = self.imgInicial
+		self.img_temp1 = self.imgInicial
+		self.img_temp2 = self.imgInicial
+		self.img_temp3 = self.imgInicial
+		
 
 	def contraste_imagem(self,c):
 			self.img = self.img_temp2
